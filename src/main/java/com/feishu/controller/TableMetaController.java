@@ -32,5 +32,6 @@ public class TableMetaController {
                             @RequestHeader("X-Base-Request-Nonce")String nonce,
                             @RequestBody TableMetaDTO tableMetaDTO) {
         return tableMetaService.info(timeStamp, nonce, tableMetaDTO);
+
     }
 }
