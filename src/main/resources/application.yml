@@ -1,0 +1,106 @@
+server:
+  port: 8866
+
+spring:
+  application:
+    name: feishu-service
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 11MB
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://10.10.32.23:3306/feishu?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      db-type: mysql
+      #初始化连接池的连接数量 大小，最小，最大
+      initial-size: 10
+      min-idle: 10
+      max-active: 200
+      #配置获取连接等待超时的时间
+      max-wait: 60000
+      #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      min-evictable-idle-time-millis: 30000
+      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: true
+      test-on-return: true
+      # 是否缓存preparedStatement，也就是PSCache
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      max-open-prepared-statements: 20
+      remove-abandoned: false
+      remove-abandoned-timeout-millis: 3600000
+      log-abandoned: true
+      log-different-thread: true
+      connection-properties: druid.stat.mergeSql=true;druid.stat.logSlowSql=true;druid.stat.slowSqlMillis=3000
+      use-global-data-source-stat: true
+      # 监控
+      aop-patterns: com.zyd.*
+      stat-view-servlet:
+        enabled: true
+        login-username: druid
+        login-password: druid
+        resetEnable: false
+        #ip白名单，以逗号分割传递多个值；相对应的deny为ip黑名单，不过貌似没啥用
+        #allow: 192.168.247.1,xxxx
+      web-stat-filter:
+        enabled: true
+        urlPattern: /*
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+      # 配置监控统计拦截的filters，stat:监控统计、log4j：日志记录、wall：防御sql注入
+      filter:
+        stat:
+          slow-sql-millis: 3000
+          logSlowSql: true
+          enabled: true
+        wall:
+          enabled: false
+          config:
+            drop-table-allow: false
+  redis:
+    database: 1
+    host: 10.10.32.21
+    port: 6378
+    timeout: 10000
+    pool:
+      max-active: 100
+      max-wait: -1
+      max-idle: 100
+      min-idle: 20
+
+springdoc:
+  swagger-ui:
+    enabled: true
+    doc-expansion: none
+    tags-sorter: alpha
+  api-docs:
+    enabled: true
+management:
+  health:
+    elasticsearch:
+      enabled: false
+
+zyd:
+  sql:
+    log:
+      enable: on
+  controllers:
+    base-package: com.feishu.controller
+    log:
+      enable: on
+    common-response:
+      enable: on
+      with-ex:
+        enable: true
+        ex-base: com.bbl
+  common-resttemplate:
+    connectTimeout: 6000
+    readTimeout: 6000
+    maxTotal: 1000
+    defaultMaxPerRoute: 100

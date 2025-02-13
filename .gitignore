@@ -1,0 +1,28 @@
+# Intellij
+*.iml
+.idea/
+
+# JAVA
+*.class
+*.log
+/logs/
+target
+application-dev.properties
+
+# node
+node_modules/
+*-lock.json
+
+# some local files
+.settings/
+.DS_Store
+
+.history/*
+.vscode/*
+.svn/*
+
+
+#gitbook
+_book/*
+_book
+_book/
