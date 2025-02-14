@@ -22,5 +22,5 @@ public class TableRecordVO {
     private String msg;
 
     @Schema(description = "数据实体")
-    private DataVO data;
+    private DataRecordVO data;
 }

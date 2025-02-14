@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/2002/xmlspec/dtd/2.10/xmlspec.dtd"> -->
+
+<configuration scan="false" scanPeriod="1s" >
+	<property name="logback.file.path" value="./logs/feishu-service" />
+	<property name="logback.sql.level" value="INFO" />
+	<property name="logback.root.level" value="INFO" />
+	<conversionRule conversionWord="logLocation" converterClass="com.zyd.framework.utils.logback.LogLocationConvert" />
+	
+	<springProperty scope="context" name="port" source="server.port"/>
+	<springProperty scope="context" name="application" source="spring.application.name"/>
+	
+	<appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>
+		<File>${logback.file.path}/error.log</File>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${logback.file.path}/error.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<MaxHistory>3</MaxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%level] [%logger{80}] %msg%n</pattern>
+		</layout>
+	</appender>
+	<appender name="warn" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>WARN</level>
+		</filter>
+		<File>${logback.file.path}/warn.log</File>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${logback.file.path}/warn.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<MaxHistory>3</MaxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%level] [%logger{80}] %msg%n</pattern>
+		</layout>
+	</appender>
+	<appender name="info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<File>${logback.file.path}/info.log</File>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${logback.file.path}/info.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<MaxHistory>3</MaxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%level] [%logger{80}] %msg%n</pattern>
+		</layout>
+	</appender>
+	<appender name="debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>DEBUG</level>
+		</filter>
+		<File>${logback.file.path}/debug.log</File> 
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${logback.file.path}/debug.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<MaxHistory>3</MaxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%level] [%logger{80}] %msg%n</pattern>
+		</layout>
+	</appender>
+	
+	 <appender name="logstash" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>DEBUG</level>
+		</filter>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${logback.file.path}/logstash/%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<MaxHistory>3</MaxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [${application}] %logLocation [${port}] [%thread] [%level] [%logger{80}] %msg%n</Pattern>
+		</layout>
+	</appender> 
+	
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>DEBUG</level>
+		</filter>
+		<encoder>
+			<pattern>[%thread][%d{yyyy-MM-dd HH:mm:ss.SSS}] [%level] %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<jmxConfigurator></jmxConfigurator>
+
+	<logger name="java.sql.Connection" level="${logback.sql.level}" />
+	<logger name="java.sql.Statement" level="${logback.sql.level}" />
+	<logger name="java.sql.PreparedStatement" level="${logback.sql.level}" />
+	<logger name="java.sql.ResultSet" level="${logback.sql.level}" />
+
+	<root level="${logback.root.level}">
+		<appender-ref ref="console" />
+		<appender-ref ref="info" />
+		<appender-ref ref="debug" />
+		<appender-ref ref="error" />
+		<appender-ref ref="warn" />
+		<appender-ref ref="logstash" /> 
+	</root>
+</configuration>
