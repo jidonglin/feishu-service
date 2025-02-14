@@ -14,7 +14,7 @@ import java.util.function.Consumer;
 public class CodeGenerator {
     public static void main(String[] args) {
         List<String> tables = new ArrayList<>();
-        tables.add("t_table_meta");
+        tables.add("t_table_record_online");
 
 
         FastAutoGenerator.create("jdbc:mysql://10.10.32.23:3306/feishu?characterEncoding=utf-8&useSSL=false&","root","123456")

@@ -11,7 +11,7 @@ import javax.validation.constraints.NotEmpty;
  * @date 2025/2/13  14:29
  */
 @Data
-public class TableMetaDTO {
+public class TableDTO {
 
     @Schema(description = "查询参数，值为 json 字符串，结构：" +
             "{" +
@@ -27,7 +27,7 @@ public class TableMetaDTO {
             "        logID: string; // 请求日志 id\n" +
             "    }," +
             "    packID: string;\n" +
-            "    type: string， // 插件类型： script、plugin\n" +
+            "    fieldType: string， // 插件类型： script、plugin\n" +
             "    tenantKey: string, // 租户标识\n" +
             "    userTenantKey: string; // 用户所属租户的租户标识\n" +
             "    bizInstanceID: string // 插件业务实例ID, 当值为0时，代表在还没有创建的情况下请求 表结构接口\n" +

@@ -22,14 +22,17 @@ public class TableMeta extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
+    @Schema(description = "字段Id")
+    @TableField("field_id")
+    private String fieldId;
 
     @Schema(description = "字段名称")
-    @TableField("name")
-    private String name;
+    @TableField("field_name")
+    private String fieldName;
 
     @Schema(description = "字段类型")
-    @TableField("type")
-    private Integer type;
+    @TableField("field_type")
+    private Integer fieldType;
 
     @Schema(description = "是否索引列 1是 0否")
     @TableField("is_primary")

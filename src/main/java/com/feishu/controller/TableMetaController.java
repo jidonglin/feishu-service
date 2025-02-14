@@ -2,7 +2,7 @@ package com.feishu.controller;
 
 
 import com.feishu.service.TableMetaService;
-import com.feishu.service.dto.TableMetaDTO;
+import com.feishu.service.dto.TableDTO;
 import com.feishu.service.vo.TableMetaVO;
 import com.zyd.framework.utils.annotation.Auth;
 import com.zyd.framework.utils.enums.AuthType;
@@ -27,11 +27,11 @@ public class TableMetaController {
 
     @PostMapping(value = "/info")
     @Operation(summary = "表结构数据")
-    @Auth(value = AuthType.AUTH, roles = {"ALL"}, permissions = {"ALL"})
-    public TableMetaVO info(@RequestHeader("X-Base-Request-Timestamp")String timeStamp,
-                            @RequestHeader("X-Base-Request-Nonce")String nonce,
-                            @RequestBody TableMetaDTO tableMetaDTO) {
-        return tableMetaService.info(timeStamp, nonce, tableMetaDTO);
+    @Auth(value = AuthType.NONE)
+    public TableMetaVO info(@RequestHeader(name = "X-Base-Request-Timestamp", required = false)String timeStamp,
+                            @RequestHeader(name = "X-Base-Request-Nonce", required = false)String nonce,
+                            @RequestBody TableDTO tableDTO) {
+        return tableMetaService.info(timeStamp, nonce, tableDTO);
 
     }
 }

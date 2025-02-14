@@ -2,7 +2,7 @@ package com.feishu.service;
 
 import com.feishu.entity.TableMeta;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.feishu.service.dto.TableMetaDTO;
+import com.feishu.service.dto.TableDTO;
 import com.feishu.service.vo.TableMetaVO;
 
 /**
@@ -15,5 +15,5 @@ import com.feishu.service.vo.TableMetaVO;
  */
 public interface TableMetaService extends IService<TableMeta> {
 
-    TableMetaVO info(String timeStamp, String nonce, TableMetaDTO tableMetaDTO);
+    TableMetaVO info(String timeStamp, String nonce, TableDTO tableDTO);
 }

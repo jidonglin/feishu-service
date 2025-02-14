@@ -14,7 +14,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @ServletComponentScan(basePackages = "com.feishu.*")
-@MapperScan("com.tgbot.mapper")
+@MapperScan("com.feishu.mapper")
 @EnableFeignClients
 public class FeiShuApplication {
     public static void main(String[] args) {
